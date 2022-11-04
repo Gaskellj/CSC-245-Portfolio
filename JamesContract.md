@@ -23,6 +23,36 @@ To earn an A I will also,
 
 I will do this whilst maintaining academic integrity by abiding by the Union College Honor Code
 
+------------------------------- KWL Chart -------------------------------
+
+| Topic | Know | Want To Know | Learned |
+| ----------- | ----------- | ----------- | ----------- |
+| Git |  | YES |  |
+| Markdown |  |  | YES |
+| Object Oriented Python |  |  | YES |
+| List Comprehension |  | YES |  |
+| Finite State Machines |  |  | YES |
+| ABBA Collisions |  | YES |  |
+| Pygame API | YES |  |  |
+| Vector Math |  | YES |  |
+| Gravity Game Physics |  |  | YES |
+| Target Seeking |  |  | YES |
+| Path Planning |  |  | YES |
+| Dijkstra's Algorithm in Python |  | YES |  |
+| Multi-Client Gaming |  | YES |  |
+
+------------------------------- RECEIPTS -------------------------------
+
+1. Markdown &rarr; ReadME and Contract documents
+2. Object Oriented Python &rarr; All assignments completed after wk2
+3. Finite State Machines &rarr; Homework FSM
+4. Pygame API &rarr; All Assignments
+5. Gravity Game Physics &rarr; Sprites & Platforms Homework
+6. Target Seeking &rarr; Flocking Homework
+7. Path Planning &rarr; Path Planning Homework
+8. 
+
+
 
 
 
