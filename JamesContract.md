@@ -50,7 +50,7 @@ I will do this whilst maintaining academic integrity by abiding by the Union Col
 5. Gravity Game Physics &rarr; Sprites & Platforms Homework
 6. Target Seeking &rarr; Flocking Homework
 7. Path Planning &rarr; Path Planning Homework
-8. 
+8. Multi-Client Gaming &rarr; Networking Homework
 
 
 
