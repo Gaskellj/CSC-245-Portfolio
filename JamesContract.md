@@ -39,7 +39,7 @@ I will do this whilst maintaining academic integrity by abiding by the Union Col
 | Target Seeking |  |  | YES |
 | Path Planning |  |  | YES |
 | Dijkstra's Algorithm in Python |  | YES |  |
-| Multi-Client Gaming |  | YES |  |
+| Multi-Client Gaming |  |  | YES |
 
 ------------------------------- RECEIPTS -------------------------------
 
