@@ -9,8 +9,6 @@ This Portfolio aims to meet all the objectives listed in my contract which can b
 
 # Directories
 
-<font size="4"> This is my text number1</font> 
-
 [Misc](./Miscallaneous) &rarr; Containing miscallaneous programs that are not class or homework assignments
 
 [Assignments](./Homework%20Assignments) &rarr; Containing the assigned homework I submitted by the deadlines
