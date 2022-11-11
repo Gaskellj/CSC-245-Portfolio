@@ -5,6 +5,8 @@ This Portfolio aims to meet all the objectives listed in my contract which can b
 
 [Contract](JamesContract.md)
 
+--------------------------------------------------------------------
+
 My portfolio is split into the following directories:
 
 [Misc](./Miscallaneous) &rarr; Containing miscallaneous programs that are not class or homework assignments
