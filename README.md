@@ -13,4 +13,4 @@ This Portfolio aims to meet all the objectives listed in my contract which can b
 
 [Assignments](./Homework%20Assignments) &rarr; Containing the assigned homework I submitted by the deadlines
 
-[Revisions](./Revisited&%20Assignments) &rarr; Containing homework assignments I have attempted to improve post submission
+[Revisions](./Revisited%20Assignments) &rarr; Containing homework assignments I have attempted to improve post submission
