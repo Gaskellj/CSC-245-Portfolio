@@ -5,4 +5,7 @@ This Portfolio aims to meet all the objectives listed in my contract which can b
 
 [Contract](JamesContract.md)
 
-[URL path to another document](./Miscallaneous)
+My portfolio is split into the following directories:
+
+[Misc](./Miscallaneous) &rarr;
+
