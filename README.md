@@ -1,4 +1,6 @@
 # CSC-245-Portfolio
 Portfolio for grading in class CSC-245
 
-[a relative link](JamesContract.md)
+This Portfolio aims to meet all the objectives listed in my contract which can be viewed here:
+
+[Contract](JamesContract.md)
