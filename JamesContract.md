@@ -48,13 +48,13 @@ I will do this whilst maintaining academic integrity by abiding by the Union Col
 2. Object Oriented Python &rarr; All assignments completed after wk2
 3. Finite State Machines &rarr; Homework FSM : [LINK](./HomeworkAssignments/FSM%20Game)
 4. Pygame API &rarr; All Assignments
-5. Gravity Game Physics &rarr; Sprites & Platforms Homework : [LINK](./HomeworkAssignments/FSM%20Game)
-6. Target Seeking &rarr; Flocking Homework : [LINK](./HomeworkAssignments/FSM%20Game)
-7. Path Planning &rarr; Path Planning Homework : [LINK](./HomeworkAssignments/FSM%20Game)
-8. Multi-Client Gaming &rarr; Networking Homework : [LINK](./HomeworkAssignments/FSM%20Game)
-9. Vactor Math &rarr; Flocking Homework : [LINK](./HomeworkAssignments/FSM%20Game)
+5. Gravity Game Physics &rarr; Sprites & Platforms Homework : [LINK](./HomeworkAssignments/Sprites_Platforms)
+6. Target Seeking &rarr; Flocking Homework : [LINK](./HomeworkAssignments/Flocking)
+7. Path Planning &rarr; Path Planning Homework : [LINK](./HomeworkAssignments/Path%20Planning)
+8. Multi-Client Gaming &rarr; Networking Homework : [LINK](./HomeworkAssignments/Networking)
+9. Vactor Math &rarr; Flocking Homework : [LINK](./HomeworkAssignments/Flocking)
 10. Git &rarr; Github Commits done from Mac Terminal
-11. ABBA Collisions &rarr; RevisitedAssignments Breakout : [LINK](./HomeworkAssignments/FSM%20Game)
+11. ABBA Collisions &rarr; RevisitedAssignments Breakout :
 
 
 
