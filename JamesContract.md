@@ -46,15 +46,15 @@ I will do this whilst maintaining academic integrity by abiding by the Union Col
 
 1. Markdown &rarr; ReadME and Contract documents
 2. Object Oriented Python &rarr; All assignments completed after wk2
-3. Finite State Machines &rarr; Homework FSM
+3. Finite State Machines &rarr; Homework FSM :
 4. Pygame API &rarr; All Assignments
-5. Gravity Game Physics &rarr; Sprites & Platforms Homework
-6. Target Seeking &rarr; Flocking Homework
-7. Path Planning &rarr; Path Planning Homework
-8. Multi-Client Gaming &rarr; Networking Homework
-9. Vactor Math &rarr; Flocking Homework
+5. Gravity Game Physics &rarr; Sprites & Platforms Homework :
+6. Target Seeking &rarr; Flocking Homework :
+7. Path Planning &rarr; Path Planning Homework :
+8. Multi-Client Gaming &rarr; Networking Homework :
+9. Vactor Math &rarr; Flocking Homework :
 10. Git &rarr; Github Commits done from Mac Terminal
-11. ABBA Collisions &rarr; RevisitedAssignments Breakout
+11. ABBA Collisions &rarr; RevisitedAssignments Breakout :
 
 
 
