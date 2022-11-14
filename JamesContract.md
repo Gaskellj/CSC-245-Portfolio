@@ -54,7 +54,7 @@ I will do this whilst maintaining academic integrity by abiding by the Union Col
 8. Multi-Client Gaming &rarr; Networking Homework : [LINK](./HomeworkAssignments/Networking)
 9. Vactor Math &rarr; Flocking Homework : [LINK](./HomeworkAssignments/Flocking)
 10. Git &rarr; Github Commits done from Mac Terminal
-11. ABBA Collisions &rarr; RevisitedAssignments Breakout : [LINK](./HRevisitedAssignments/Breakout)
+11. ABBA Collisions &rarr; RevisitedAssignments Breakout : [LINK](./RevisitedAssignments/Breakout)
 
 
 
