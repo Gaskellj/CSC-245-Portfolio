@@ -46,7 +46,7 @@ I will do this whilst maintaining academic integrity by abiding by the Union Col
 
 1. Markdown &rarr; ReadME and Contract documents
 2. Object Oriented Python &rarr; All assignments completed after wk2
-3. Finite State Machines &rarr; Homework FSM :
+3. Finite State Machines &rarr; Homework FSM : [LINK](./HomeworkAssignments/FSM%202)
 4. Pygame API &rarr; All Assignments
 5. Gravity Game Physics &rarr; Sprites & Platforms Homework :
 6. Target Seeking &rarr; Flocking Homework :
