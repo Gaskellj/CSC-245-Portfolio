@@ -28,7 +28,7 @@ I will do this whilst maintaining academic integrity by abiding by the Union Col
 
 | Topic | Know | Want To Know | Learned |
 | ----------- | ----------- | ----------- | ----------- |
-| Git |  | YES |  |
+| Git |  |  | YES |
 | Markdown |  |  | YES |
 | Object Oriented Python |  |  | YES |
 | List Comprehension |  | YES |  |
@@ -53,6 +53,7 @@ I will do this whilst maintaining academic integrity by abiding by the Union Col
 7. Path Planning &rarr; Path Planning Homework
 8. Multi-Client Gaming &rarr; Networking Homework
 9. Vactor Math &rarr; Flocking Homework
+10. Git &rarr; Github Commits done from Mac Terminal
 
 
 
