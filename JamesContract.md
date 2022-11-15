@@ -51,7 +51,7 @@ I will do this whilst maintaining academic integrity by abiding by the Union Col
 5. Gravity Game Physics &rarr; Sprites & Platforms Homework : [LINK](./HomeworkAssignments/Sprites_Platforms)
 6. Target Seeking &rarr; Flocking Homework : [LINK](./HomeworkAssignments/Flocking)
 7. Path Planning &rarr; Path Planning Homework : [LINK](./HomeworkAssignments/PathPlanning)
-8. Multi-Client Gaming &rarr; Networking Homework : [LINK](./HomeworkAssignments/Networking)
+8. Multi-Client Gaming &rarr; Networking Homework : [LINK](./HomeworkAssignments/Networking%20V2)
 9. Vactor Math &rarr; Flocking Homework : [LINK](./HomeworkAssignments/Flocking)
 10. Git &rarr; Github Evidence Documents : [LINK](./Miscallaneous)
 11. ABBA Collisions &rarr; RevisitedAssignments Breakout : [LINK](./RevisitedAssignments/Breakout)
