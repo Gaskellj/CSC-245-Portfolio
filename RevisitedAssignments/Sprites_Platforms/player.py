@@ -58,23 +58,27 @@ class Player(pygame.sprite.Sprite):
         # Move left/right
        
         frame = (self.rect.x // 30) % len(self.walking_frames)
-        self.image = self.walking_frames[frame]
+        if self.v.x < 0:
+            self.image = pygame.transform.flip(self.walking_frames[frame], True, False)
+        else:
+            self.image = self.walking_frames[frame]
 
 
 
     def simulate(self):
         """ Calculate effect of gravity. """
+        self.v.y += 0.05
         ## NOTE USE self.rect for position
         self.rect.x += self.v.x
         self.rect.y += self.v.y
 
     def jump(self):
-        """ Called when user hits 'jump' button. """
+        self.v.y = -2.5
         pass
 
     # Player-controlled movement:
     def go_left(self):
-        """ Called when the user hits the left arrow. """
+        self.v = Vector(-1,0)
         pass
 
     def go_right(self):
