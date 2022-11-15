@@ -31,7 +31,7 @@ I will do this whilst maintaining academic integrity by abiding by the Union Col
 | Git |  |  | YES |
 | Markdown |  |  | YES |
 | Object Oriented Python |  |  | YES |
-| List Comprehension |  | YES |  |
+| List Comprehension |  |  | YES |
 | Finite State Machines |  |  | YES |
 | ABBA Collisions |  |  | YES |
 | Pygame API | YES |  |  |
@@ -55,6 +55,7 @@ I will do this whilst maintaining academic integrity by abiding by the Union Col
 9. Vactor Math &rarr; Flocking Homework : [LINK](./HomeworkAssignments/Flocking)
 10. Git &rarr; Github Commits done from Mac Terminal
 11. ABBA Collisions &rarr; RevisitedAssignments Breakout : [LINK](./RevisitedAssignments/Breakout)
+12. List Comprehensions &rarr; RevisitedAssignments Breakout : [LINK](./RevisitedAssignments/Breakout)
 
 
 
