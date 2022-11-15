@@ -15,4 +15,4 @@ This Portfolio aims to meet all the objectives listed in my contract which can b
 
 [Revisions](./RevisitedAssignments) &rarr; Containing homework assignments I have attempted to improve post submission
 
-edited and pushed using git
+This edit was made and pushed using terminal and git
