@@ -14,6 +14,7 @@ import random
 from vector import Vector
 from fsm_character import FSMBeakBall
 from world import World
+from moving_ball_2d import  MovingBall
 
 def run_game():
     
@@ -40,6 +41,8 @@ def run_game():
     ## a dictionary to remember which keys are pressed
     keymap = {}
 
+    target = MovingBall (150, 175, 10, float('inf'), pygame.color.Color("black"), 0, 0)
+
     ## setting up the clock
     clock = pygame.time.Clock()
     dt = 0
@@ -49,7 +52,7 @@ def run_game():
     keepGoing = True    
     while (keepGoing):
 
-        dt = clock.tick()
+        dt = clock.tick(499)
         if dt > 500:
             continue
 
@@ -58,26 +61,41 @@ def run_game():
             if event.type == pygame.QUIT:
                 keepGoing = False
 
+        mousepos = pygame.mouse.get_pos()
+        mousepos = Vector(mousepos[0],mousepos[1])
+        target.p = mousepos
+        
+        ## Simulate game world
+        target.move (dt, world)
+        target.collide_edge (world)
+
+        cumulative_x = 0
+        cumulative_y = 0
+
 
         ## Simulate game world
 
         for c in character_list:
             c.fsm.update (world)
-            c.execute_actions ()
+            c.execute_actions (target, character_list)
+            c.steering = []
        
             c.move(dt, world)
             c.collide_edge (world)
+            cumulative_x += c.p.x
+            cumulative_y += c.p.y
+        
 
         
         ## Rendering
         # Draw frame
         pygame.draw.rect (my_win, pygame.color.Color("green"), (0,0,width/2,height))
         pygame.draw.rect (my_win, pygame.color.Color("red"), (width/2,0,width/2,height))
-        pygame.draw.rect (my_win, pygame.color.Color("black"), (width/4-50 ,height/2-50 ,100,100))
-        pygame.draw.rect (my_win, pygame.color.Color("black"), (width - width/4-50 ,height/2-50 ,100,100))
 
         for c in character_list:
             c.draw(my_win)
+
+        target.draw(my_win)
 
         # Swap display
         pygame.display.update()

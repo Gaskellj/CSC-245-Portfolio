@@ -25,7 +25,7 @@ class MovingBall :
 
     e = 0.0
 
-    speedlimit = Vector(500.0, 500.0) 
+    speedlimit = Vector(5000, 5000) 
 
     color = pygame.color.Color('darkgreen')
 

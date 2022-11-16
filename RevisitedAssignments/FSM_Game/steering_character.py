@@ -10,7 +10,7 @@ class BeakBall (MovingBall):
     beak_tip = Vector(0,20)
     max_acceleration = 200.0
 
-    speedlimit = Vector(500,500)
+    speedlimit = Vector(2000,2000)
 
     steering = []
 
@@ -42,42 +42,62 @@ class BeakBall (MovingBall):
             self.v = self.v + s
 
 
-    def wander(self,weight):
-        random_x = self.r * random.uniform(-1,1)
-        random_y = self.r * random.uniform(-1,1)
-        target = Vector(random_x,random_y)
-        max_speed = self.speedlimit.length()
-        desired_velocity = target * max_speed
-        for i in range(0,10):
-            self.steering += [(desired_velocity - self.v) * weight]
-    
-    def teleport(self):
-        print('Sprite Teleported')
-        self.v = Vector(0,0)
-        self.p.x = random.randint(512,1024)
-        self.p.y = random.randint(384,768)
-    
-    def change_color(self):
-        self.color = random.choice(self.color_list)
+    def arriving(self, target, weight):
+        distance = (abs(self.p.x - target.p.x) + abs(self.p.y - target.p.y))**0.5
+        required_distance = (self.r + target.r * 4)/5
+        if distance > required_distance:
+            self.seek(target, 1.0/30)
+        else:
+            speed_reduction = distance/required_distance
+            desired_direction = (target.p - self.p).normalize()
+            max_speed = self.speedlimit.length()
+            desired_velocity = desired_direction * speed_reduction * max_speed
+            self.steering += [(desired_velocity - self.v)*weight]
 
-    def loop(self,weight):
-        self.color = 'orange'
-        self.radius = self.radius + 0.01
-        x = int(math.cos(self.angle) * 3) + self.p.x
-        y = int(math.sin(self.angle) * 3) + self.p.y
-        self.p.x = x
-        self.p.y = y
-        self.angle += 0.05
-        random_x = self.r * random.uniform(-1,1)
-        random_y = self.r * random.uniform(-1,1)
-        target = Vector(random_x*10,random_y*10)
-        max_speed = self.speedlimit.length()
-        desired_velocity = target * max_speed
-        for i in range(0,10):
-            self.steering += [(desired_velocity - self.v) * weight]
+    def fleeing(self, target, weight):
+        distance = (abs(self.p.x - target.p.x) + abs(self.p.y - target.p.y))**0.5
+        required_distance = (self.r + target.r * 4)/5
+        if distance < required_distance:
+            desired_direction = (target.p - self.p).normalize()
+            desired_direction.x = 0 - desired_direction.x
+            desired_direction.y = 0 - desired_direction.y
+            max_speed = self.speedlimit.length()
+            desired_velocity = desired_direction * max_speed
+            self.steering += [(desired_velocity - self.v)*weight]
 
-    def freeze(self):
-        self.v = Vector(0,0)
+    def seek(self, target, weight):
+
+        #find difference between my location and target location 
+        desired_direction = (target.p - self.p).normalize()
+        #multiply direction by max speed
+        max_speed = self.speedlimit.length()
+        desired_velocity = desired_direction * max_speed
+        ## first find the "error" between current velocity and desired velocity, and then multiply that error 
+        ## by the weight, and then add it to steering inputs
+        self.steering += [(desired_velocity - self.v)*weight]
+
+    def cohesion(self, centroid, weighting):
+        desired_direction = (centroid.p - self.p).normalize()
+        max_speed = self.speedlimit.length()
+        desired_velocity = desired_direction * max_speed
+        self.steering += [(desired_velocity - self.v)* weighting]
+
+    def separation(self, boids, weight):
+        for i in boids:
+            adjustment = Vector(0,0)
+            distance_away = (abs(self.p.x - i.p.x) + abs(self.p.y - i.p.y))**0.5
+            if distance_away <= 9:
+                adjustment.x = adjustment.x - (self.p.x - i.p.x)
+                adjustment.y = adjustment.y - (self.p.y - i.p.y)
+            self.v -= adjustment*weight
+
+    def align(self, boids, number_of_boids):
+        TotalVelocity = Vector(0,0)
+        for i in boids:
+            TotalVelocity += i.v
+        AverageVelocity = Vector((TotalVelocity.x - self.v.x)/(number_of_boids-1), (TotalVelocity.y - self.v.y)/(number_of_boids-1))
+        Difference = AverageVelocity - self.v
+        self.v = self.v + Difference/2
 
 
 
