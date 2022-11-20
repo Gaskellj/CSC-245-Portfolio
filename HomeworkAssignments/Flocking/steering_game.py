@@ -41,7 +41,7 @@ def run_game():
         boids.append(c)
 
     ## the target
-    target = MovingBall (150, 175, 20, float('inf'), pygame.color.Color("red"), 0, 0)
+    target = MovingBall (150, 175, 10, float('inf'), pygame.color.Color("red"), 0, 0)
 
     centroid = MovingBall (0, 0, 3, float('inf'), pygame.color.Color("green"), 0, 0)
     
@@ -54,7 +54,7 @@ def run_game():
     keepGoing = True    
     while (keepGoing):
 
-        dt = clock.tick()
+        dt = clock.tick(60)
         if dt > 500:
             continue
 
@@ -105,6 +105,8 @@ def run_game():
         centroid.draw(my_win)
         
         target.draw(my_win)
+
+        centroid.draw(my_win)
 
         # Swap display
         pygame.display.update()
