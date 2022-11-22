@@ -16,11 +16,12 @@ class CueStick:
         self.length = length
         self.tangent = 0
 
-    def hit_ball(self, cue_ball, force):
-        print(self.tangent)
-        print(force)
-
     def draw(self, surface, cuex, cuey):
+
+        ## Draws the cue
+        # Uses triganometry to solve for the direction the guide should be drawn on
+        # Draws the guide - length can be adjusted by adjusting the length parameter in the main gama
+
         self.x, self.y = pygame.mouse.get_pos()
         self.tangent = (degrees(atan2((cuey - self.y), (cuex - self.x))))
         pygame.draw.line(surface, (0,0,0), (cuex + self.length*cos(radians(self.tangent)), cuey + self.length*sin(radians(self.tangent))), (cuex, cuey), 1)

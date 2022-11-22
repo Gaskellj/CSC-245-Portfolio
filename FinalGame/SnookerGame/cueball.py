@@ -11,6 +11,11 @@ class Cueball (MovingBall):
         self.foul_status = FoulStatus    
 
     def place_ball(self, surface, balls, table_width, table_height, x, y):
+
+        ## Checks the ball is placed on the table rather than anywhere on the window
+        # Checks the cueball is not placed on top of any other balls
+        # Draws the ball on the window one it is placed
+        
         for b in balls:
             d = self.p - Vector(x,y)
             if d.length() < self.r + b.r:

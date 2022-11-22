@@ -5,6 +5,7 @@
 ##
 
 import math
+from re import T
 import pygame
 import random
 from cue import CueStick
@@ -27,7 +28,6 @@ def run_game():
     rail_list = []
     pocket_list = []
     current_break = []
-    moves_history = []
     potted_balls = []
     respot_list = []
     
@@ -35,20 +35,21 @@ def run_game():
     height = 480
     my_win = pygame.display.set_mode((width,height))
 
-    ## important properties of the environment
-
-    ## initialize the balls
-
-    # elasticity coefficient
-    
     ## setting up the clock
-    clock = pygame.time.Clock()
+
+
     dt = 0
+
+    ## Creates the color for the cueball
 
     white = (236, 240, 241)
 
+    ## Creates the table color (brown) and the cloth color (green different to rails)
+
     table_color = (93, 41, 6)
     cloth_color = (10, 108, 3)
+
+    ## Creates the colors for the balls
 
     black = (23, 32, 42)
     yellow = (244, 208, 63)
@@ -57,56 +58,66 @@ def run_game():
     green = (1,50,32)
     brown = (101, 67, 33)
     pink = (199,21,133)
+
+    ## Creates the cue color
+
     stickColor = (249, 231, 159)
+
+    ## Marks the y and x values for the rightmost and bottommost part of the table 
 
     table_width = width - 163
     table_height = height - 263
 
+    ## Runs the subroutine to initialise the table
+
     create_table(pocket_list, rail_list, table_width, table_height)
 
 
+    ## Runs the subroutine to initialise the balls
+    # All balls have mass of 1 and radius 7
+
     ball_mass = 1.0
     ball_radius = 7
-
     create_balls(table_height, table_width, balls, red, yellow, green, brown, blue, black, pink, ball_mass, ball_radius)
 
-    cue_ball = Cueball(84+4/5*table_width, table_height/2+65, ball_radius, ball_mass,  white, 0,0, "cue", -4, Vector (84+4/5*table_width, table_height/2+65), False)
+    ## Creates the cue and cueball
 
+    cue_ball = Cueball(84+4/5*table_width, table_height/2+65, ball_radius, ball_mass,  white, 0,0, "cue", -4, Vector (84+4/5*table_width, table_height/2+65), False)
     cue = CueStick(0,0,100,stickColor)
 
-
-    ## The game loop starts here.
-
+    ## Initialises the variables that will track the state of the game
+    
     ball_moving = False
-
     ball_in_hand = False
+
+    shot_played = False
+    ball_potted = False
+    Foul = False
+
+    ## Initialises the variables that will contain the player information (name and score)
 
     player1_Score = ["", 0]
     player2_Score = ["", 0]
-
     current_player = 1
 
+    ## Ensures the player name selections and the main game play out in order
+    # After the game is finished GameOver is used to inform the system to display the win/draw page
 
     introP1 = True
     introP2 = True
     keepGoing = True
     GameOver = False
-    TieBreaker = False
 
-    shot_played = False
-    ball_potted = False
-
-    Foul = False
+    ## Initialises the list that will hold the high scores
+    # Triggers subroutines that read in high scores from the file and order them
 
     HighScores = []
-
     find_high_scores(HighScores)
     sort_high_scores(HighScores)
 
-    print(HighScores)
 
     #########
-    ## The intro screen: lets the player input a name
+    ## Intro screen: lets the player1 input a name
     #########
     while introP1:
         for event in pygame.event.get():
@@ -136,6 +147,10 @@ def run_game():
         my_win.blit(label, (50,height/2-50))
 
         pygame.display.update()
+
+    #########
+    ## Intro screen: lets the player2 input a name
+    #########
 
     while introP2:
         for event in pygame.event.get():
@@ -167,18 +182,25 @@ def run_game():
 
     my_win = pygame.display.set_mode((width+100,height+100))
 
+    #########
+    ## The main gameloop
+    #########
+
     while (keepGoing):
+
+        ## clears thre pottedballs list every game loop
 
         potted_balls = []
 
-        #dt = clock.tick(50)
-        #print dt
-
-        ## Handle events.
+        ## Quits the game if the window is closed
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 keepGoing = False
+
+            ## Checksif the player has ball in hand
+            # If yes, the ball is placed where the user clicks
+            # If no, the click is used with vector math to calculate the velocity and direction of the cueball
 
             if not ball_in_hand:
                 if event.type == pygame.MOUSEBUTTONDOWN and ball_moving == False and ball_in_hand == False:
@@ -212,9 +234,8 @@ def run_game():
         for b in balls:
             b.simulate(dt, width, height)
 
-        #print b1.v
-
-        ## Draw frame
+        ## Draws frame
+        # Outputs the scores, current break and Highest breaks list tothe screen
         
         my_win.fill(pygame.color.Color("gray14"))
 
@@ -253,21 +274,19 @@ def run_game():
         label = myFont.render("Current Player: " + name, True, pygame.color.Color((7,90,1)))
         my_win.blit(label, (50,height))
 
-
         for b in balls:
                 b.draw(my_win)
                 b.bounce_rail(table_width, table_height)
 
-        pygame.draw.rect(my_win, cloth_color, pygame.Rect(75, 75, width-150, height-250))
+        ## Draws the rails, pockets and baulk line / Semicircle on the screen
 
+        pygame.draw.rect(my_win, cloth_color, pygame.Rect(75, 75, width-150, height-250))
         draw_baulk_line(my_win, table_width,table_height, black, cloth_color)
 
         for rail in rail_list:
             rail.draw(my_win)
 
         pygame.draw.rect(my_win, table_color, pygame.Rect(50, 50, width-100, height-200),  16, 20)
-
-
 
         for pocket in pocket_list:
             pocket.draw(my_win)
@@ -278,19 +297,27 @@ def run_game():
         except NameError:
             pass
 
+        ## Draws the balls on the table
+        # Checks if a collision has taken place between the balls and rails
+
 
         for ball in balls:
             ball.draw(my_win)
+            b.bounce_rail(table_width, table_height)
 
+
+        ## Checks if collisions have taken place between balls
 
         for i in range(0,len(balls)):
             b1 = balls[i]
             for j in range(i+1,len(balls)):
                 b2 = balls[j]
-               #calculate normal of collission
                 b1.collide_object(b2)
-                #if n != None:
-                    #print("do something here")
+
+        ## Checks if a collision has taken place between the cueball and balls
+        # Checks if a collision has occured between balls and pockets
+        # Checks if any balls are moving to decide wehter the turn is over and updates ball_moving variable
+
 
         ball_moving = False
         for b in balls:
@@ -315,6 +342,9 @@ def run_game():
                 ball_moving = True
         except NameError:
             pass
+
+        ## Only draws the cue when all balls are stationary
+        # Respots any colored balls when all balls are stationary
         
 
         if not ball_moving:
@@ -328,8 +358,10 @@ def run_game():
                     cue_ball = r
                 else:
                     balls.append(r)
-
             respot_list.clear()
+
+        ## Checks if the cueball has collided with a pocket
+        # If yes, creates a new cueball, sets the ball in hand condition and removes the old cueball from the game
 
         try:    
             white_potted = cue_ball.collide_pockets_cueball(pocket_list)
@@ -344,6 +376,9 @@ def run_game():
             ball_in_hand = True
             Foul = True
 
+        ## Adds the scores of the potted balls to the current player's score
+        # If any negative values in the potted balls list (fouls) these points are added to the opponent's tally
+
         if(len(potted_balls)) > 0:
             ball_potted = True
             for value in potted_balls:
@@ -351,7 +386,8 @@ def run_game():
                 add_score(value,current_player,player1_Score, player2_Score)
                 potted_balls.clear()
 
-
+        ## Changes the current player iif a ball is not potted or a foul takes place
+        # if the player changes the break is initialised to an empty list
 
         if not ball_moving and shot_played and (not ball_potted or Foul):
             if current_player == 1:
@@ -366,6 +402,10 @@ def run_game():
             shot_played = False
             ball_potted = False
             print(current_break)
+
+            ## Checks if the current break is bigger than any of the current high scores
+            # if yes, adds that highscore to the file with the player's name and removes the one it replaces
+
             if current_player == 1:
                 check_change_high_scores(HighScores, current_break, player1_Score)
             else:
@@ -377,42 +417,53 @@ def run_game():
         ## Swap display
 
         pygame.display.update()
-
+    
+    my_win = pygame.display.set_mode((width,height))
 
     while not GameOver:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 GameOver = True
-                keepGoing = False
 
-        
+            elif event.type==pygame.KEYDOWN:
+
+                ## Allows the user to play again if they press enter
+
+                if event.key == 13:
+                    run_game()
+
 
         ## Draw picture and update display
         my_win.fill(pygame.color.Color(cloth_color))
 
+        ## Checks who has won the game
+        # Checks for ties
+
         if player1_Score[1] > player2_Score[1]:
             winner = player1_Score
-            TieBreaker = False
-        elif player1_Score < player2_Score:
+            tie = False
+        elif player2_Score[1] > player1_Score[1]:
             winner = player2_Score
-            TieBreaker = False
+            tie = False
         else:
-            TieBreaker = True
-            GameOver = True
+            tie = True
 
         font = pygame.font.Font(None, 25)
-        text = font.render("Congratulations " + winner[0] + "! You win with a score of" + str(winner[1]), True, black)
+
+        ## Outputs the winner to screen
+        # Outputs tie to the screen if the scores were even
+
+        if not tie:
+            text = font.render("Congratulations " + winner[0] + "! You win!", True, black)
+            text2 = font.render("Press enter to play again or close the window to quit", True, black)
+            text2_rect = text2.get_rect(center=(width/2, height/2+50))
+            my_win.blit(text2,text2_rect)
+        else:
+            text = font.render("It's a tie! Press enter to play again or close the window to quit", True, black)
         text_rect = text.get_rect(center=(width/2, height/2))
         my_win.blit(text, text_rect)
 
-        pygame.display.update()
 
-    while TieBreaker:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                GameOver = True
-                keepGoing = False
-        
         pygame.display.update()
 
     ## The game loop ends here.
@@ -499,6 +550,11 @@ def add_score(score, current_player, player1, player2):
             player1[1] += abs(score)
 
 def find_high_scores(HighScores):
+
+    ## Opens the high scores file
+    # Splits lines by commas
+    # Adds the scores to the HighScores list
+
     with open ('HighBreak.txt') as f:
         lines = f.readlines()
         for line in lines:
@@ -506,10 +562,17 @@ def find_high_scores(HighScores):
             HighScores.append([line[0],int(line[1])])
 
 def sort_high_scores(HighScores):
+
+    ## Built in function to sort the scores in descending order
+
     HighScores.sort(reverse = True, key = lambda x: x[1])
     return (HighScores)
 
 def check_change_high_scores(HighScores, CurrentBreak, CurrentPlayer):
+
+    ## Checks if the current break should be added to the high scores list
+    # If a new high score is added triggers a write to the file
+
     break_total = sum(CurrentBreak)
     ScoreAdded = False
     for Score in HighScores:
@@ -524,12 +587,13 @@ def check_change_high_scores(HighScores, CurrentBreak, CurrentPlayer):
         write_high_scores(HighScores)
 
 def write_high_scores(HighScores):
+
+    ## Writes the high scores from the high scores list to file
+    # Replaces everything already in the file due to opening with 'w'
+
     with open ('HighBreak.txt','w') as f:
         for Score in HighScores:
             f.write(Score[0] + ", " + str(Score[1]) + "\n")
-
-
-
 
 ## Start game
 run_game()

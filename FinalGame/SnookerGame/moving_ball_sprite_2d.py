@@ -105,10 +105,7 @@ class MovingBall (Ball):
         the center of the first to the center of the second ball if
         there is a collision.
         """
-        # d: vector from self to the other ball. We can use the length
-        # of d to determine whether the two balls overlap; and the
-        # direction of d indicates the direction along which the
-        # impact is happening, i.e. the collision normal.
+
         d = self.p - other.p
         if d.length() < self.r + other.r:
             self.repair_position (d, other)
@@ -120,6 +117,7 @@ class MovingBall (Ball):
     def apply_impulse (self, j, n):
         """ j is the impulse; n the collision normal, i.e. the
         direction along which the impact happens."""
+        
         self.v = self.v + n * (j / self.m)
 
     def repair_position (self, rel_pos, other):
@@ -127,6 +125,7 @@ class MovingBall (Ball):
         touching but not overlapping. How much each of the objects
         gets moved depends on its mass, so that objects with an
         infinite mass do not get moved."""
+
         # dividing by 10, because the length of our normal vector is 10 pixels
         repair = float(self.r + other.r - rel_pos.length())#/10
         rel_pos.normalize()
@@ -139,10 +138,6 @@ class MovingBall (Ball):
             other.p = other.p + (rel_pos* -1 * repair*(self.m/(self.m+other.m)))
 
     def getResponse(self,other,normvector):
-                    # new velocity is 
-                    # v1_normal' = v1_normal*(m1-m2)+2*m2*v2_normal
-                    #              ----------------------------      
-                    #                   m1 + m2
         return Vector(0,0)
 
     def bounce (self, j, n):
@@ -154,6 +149,10 @@ class MovingBall (Ball):
         self.v = v
 
     def friction(self):
+
+        ## Slows balls down as they move along the table due to friction
+        # Uses a friction coefficicient that increases over time to make it seem realistic
+
         self.v *= self.friction_coefficient
         self.friction_coefficient = self.friction_coefficient  **1.003
         if abs(self.v.x) < 0.01:
@@ -168,6 +167,10 @@ class MovingBall (Ball):
             self.friction_coefficient = 0.99999
 
     def collide_pockets_red (self, ball_list, pocket_list, potted_balls):
+
+        ## Checks if reds are potted
+        # Used for colors when they do not require a respot (acting like reds)
+
         for p in pocket_list:
             position = Vector(p.x,p.y)
             d = self.p - position
@@ -176,6 +179,11 @@ class MovingBall (Ball):
                 potted_balls.append(self.value)
 
     def collide_pockets_color(self, ball_list, pocket_list, potted_balls, respot_list):
+
+        ## Checks if colors are potted
+        # Adds potted balls to the respot list to be re-added to the game
+        # Initialises their positions to their original spots and their velocities to 0
+
         for p in pocket_list:
             position = Vector(p.x,p.y)
             d = self.p - position
@@ -188,20 +196,14 @@ class MovingBall (Ball):
                 ball_list.remove(self)
 
     def collide_pockets_cueball(self, pocket_list):
+
+        ## Checks is the white is potted
+        # Returns true if potted
+
         white_potted = False
         for p in pocket_list:
             position = Vector(p.x,p.y)
             d = Vector(self.p.x,self.p.y) - position
             if d.length() < self.r + p.r:
                 white_potted = True
-                print('white potted')
-                print(white_potted)
         return white_potted
-
-    def ball_in_hand(self):
-        x, y = pygame.mouse.get_pos()
-        self.p.x = x
-        self.p.y = y
-
-    def normal_play(self):
-        pass

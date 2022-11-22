@@ -28,5 +28,10 @@
 * When a color is potted, it is re-added to the table in its original position
 * When a red is potted it is not re-added to the table
 * Once all the reds have been potted the colors are no longer re-added to the table when they are potted respectively
+
+------- Win Condition -------
+
 * A player wins by obtaining a higher score than their oponent once all balls on the table are potted
+* If the players'scores are equal, the black is respotted and the first person to pot the black wins
+* If a player fouls on the black respot they automatically lose
 

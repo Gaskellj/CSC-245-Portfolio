@@ -52,7 +52,9 @@
 41. Added a check to see if current break is higher than a highscore in the HighScores list
 42. Added functionality to replace the lowest score in HighScores if the current break is higher
 43. Created a write function to overwrite the HighBreak text file when a new high score is recorded
-44. 
+44. Created a screen that displays the winner's name and score after all balls are potted
+45. Created a tie screen that allows the player to play again or quit
+46. Added the play again/quit functionality to the winning screen
 
 
 
