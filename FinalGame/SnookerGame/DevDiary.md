@@ -33,13 +33,26 @@
 25. Created Player1 and Player2 variables to track names and scores
 26. Added the sign in pages for player 1 and 2
 27. Added backspace functionality to the sign in pages
-
-
-11/21/2022
-
 29. Added foul behaviour for the cueball
 30. Rolled the cueball into the respot loop to prevent it being respotted whilst balls are still moving
 31. Fixed a bug by creating a new cueball and deleting the old one every time it is potted
 32. Introduced a change in player after the cueball is potted
 33. Used exception handling to stop cue_ball being referenced before it is added back to the game
-34. Added ball in hand behaviour soif the cueball is potted it can be movedby the next player
+34. Added ball in hand behaviour so if the cueball is potted it can be moved by the next player
+35. Added a conditon to trigger a change in player after balls stop moving when a shot has been played
+36. Ammended the condition to check if a non-foul pot has been made by the player
+
+11/21/2022
+
+37. Treats a color as a red (except for ball value) when all the reds have been potted i.e. ball count <= 5 as per snooker rules - not respotted
+38. Added a text file to track highest breaks
+39. Created a function to read the highscores into the game
+40. Created a loop to display the highscores on the screen using labels
+41. Created a function to return the highscores in order
+41. Added a check to see if current break is higher than a highscore in the HighScores list
+42. Added functionality to replace the lowest score in HighScores if the current break is higher
+43. Created a write function to overwrite the HighBreak text file when a new high score is recorded
+44. 
+
+
+
