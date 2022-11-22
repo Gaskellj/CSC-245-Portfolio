@@ -13,6 +13,7 @@ from moving_ball_sprite_2d import MovingBall
 from vector import Vector
 from rail import Rail
 from pocket import Pocket
+from cueball import Cueball
 
 def run_game():
     
@@ -69,24 +70,28 @@ def run_game():
 
     create_balls(table_height, table_width, balls, red, yellow, green, brown, blue, black, pink, ball_mass, ball_radius)
 
-    cue_ball = MovingBall(84+4/5*table_width, table_height/2+65, 7, ball_mass,  white, 0,0, "cue", -4, Vector (84+4/5*table_width, table_height/2+65))
+    cue_ball = Cueball(84+4/5*table_width, table_height/2+65, ball_radius, ball_mass,  white, 0,0, "cue", -4, Vector (84+4/5*table_width, table_height/2+65), False)
 
-    cue = CueStick(0,0,50,stickColor)
+    cue = CueStick(0,0,100,stickColor)
 
 
     ## The game loop starts here.
 
     ball_moving = False
 
+    ball_in_hand = False
+
     player1_Score = ["", 0]
     player2_Score = ["", 0]
 
-    current_player = player1_Score
+    current_player = 1
 
 
     introP1 = True
     introP2 = True
     keepGoing = True
+
+    shot_played = False
 
     #########
     ## The intro screen: lets the player input a name
@@ -95,6 +100,7 @@ def run_game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 introP1 = False
+                introP2 = False
                 keepGoing = False
 
             elif event.type==pygame.KEYDOWN:
@@ -153,7 +159,6 @@ def run_game():
 
         potted_balls = []
 
-
         #dt = clock.tick(50)
         #print dt
 
@@ -163,7 +168,7 @@ def run_game():
             if event.type == pygame.QUIT:
                 keepGoing = False
 
-            if event.type == pygame.MOUSEBUTTONDOWN and ball_moving == False:
+            if event.type == pygame.MOUSEBUTTONDOWN and ball_moving == False and ball_in_hand == False:
                 start = Vector(cue_ball.p.x, cue_ball.p.y)
                 x, y = pygame.mouse.get_pos()
                 end = Vector(x ,y)
@@ -177,10 +182,14 @@ def run_game():
                 start *= force
                 cue_ball.v = start
 
-            print(player1_Score)
-            print(player2_Score)
+                shot_played = True
 
-                
+            while ball_in_hand:
+                if event.type == pygame.MOUSEBUTTONDOWN and ball_moving == False and ball_in_hand == True:
+                    x, y = pygame.mouse.get_pos()
+                    cue_ball.place_ball(my_win, balls, height, width)
+
+
 
         ## Simulate game world
         for b in balls:
@@ -191,6 +200,20 @@ def run_game():
         ## Draw frame
         
         my_win.fill(pygame.color.Color("gray14"))
+
+        label = myFont.render(player1_Score[0] + "'s Score = " + str(player1_Score[1]), True, pygame.color.Color(cloth_color))
+        my_win.blit(label, (50,height-110))
+
+        label = myFont.render(player2_Score[0] + "'s Score = " + str(player2_Score[1]), True, pygame.color.Color(cloth_color))
+        my_win.blit(label, (50,height-60))
+
+        if current_player == 1:
+            name = player1_Score[0]
+        else:
+            name = player2_Score[0]
+
+        label = myFont.render("Current Player: " + name, True, pygame.color.Color((7,90,1)))
+        my_win.blit(label, (50,height))
 
 
         for b in balls:
@@ -211,9 +234,12 @@ def run_game():
         for pocket in pocket_list:
             pocket.draw(my_win)
 
-        cue_ball.simulate(dt, table_width, table_height)
+        try:
+            cue_ball.simulate(dt, table_width, table_height)
+            cue_ball.draw(my_win)
+        except NameError:
+            pass
 
-        cue_ball.draw(my_win)
 
         for ball in balls:
             ball.draw(my_win)
@@ -230,43 +256,66 @@ def run_game():
 
         ball_moving = False
         for b in balls:
-            n = b.collide_object(cue_ball)
-            if n != None:
-                cue_ball.v *= 0.95
-                b.v *= 0.95
+            try:
+                n = b.collide_object(cue_ball)
+                if n != None:
+                    cue_ball.v *= 0.95
+                    b.v *= 0.95
+            except NameError:
+                pass
             if b.value == 1:
                 b.collide_pockets_red(balls,pocket_list, potted_balls)
             elif b.value > 1:
                 b.collide_pockets_color(balls, pocket_list, potted_balls, respot_list)
             if b.v.x !=0 or b.v.y != 0:
                 ball_moving = True
-        if cue_ball.v.x != 0 or cue_ball.v.y != 0:
-            ball_moving = True
+        try:
+            if cue_ball.v.x != 0 or cue_ball.v.y != 0:
+                ball_moving = True
+        except NameError:
+            pass
+        if not ball_moving and shot_played:
+            if current_player == 1:
+                current_player = 2
+            else:
+                current_player = 1
+            shot_played = False
+        
 
         if not ball_moving:
-            cue.draw(my_win,cue_ball.p.x, cue_ball.p.y)
+            try:    
+                cue.draw(my_win,cue_ball.p.x, cue_ball.p.y)
+            except NameError:
+                pass
             for r in respot_list:
-                balls.append(r)
+                if r.value == -4:
+                    cue_ball = r
+                else:
+                    balls.append(r)
+
             respot_list.clear()
 
-
-        Foul = False
+        try:    
+            white_potted = cue_ball.collide_pockets_cueball(pocket_list)
+        except NameError:
+            pass
+        if white_potted:
+            cue_ball_new = Cueball(cue_ball.spot_position.x, cue_ball.spot_position.y, 7, cue_ball.m,  cue_ball.color, 0,0, "cue", -4, Vector (cue_ball.spot_position.x, cue_ball.spot_position.y), True)
+            respot_list.append(cue_ball_new)
+            potted_balls.append(-4)
+            del cue_ball
+            white_potted = False
 
         if(len(potted_balls)) > 0:
-            for i in range(0,len(potted_balls)-1):
-                if potted_balls[i] == potted_balls[i+1]:
-                    pass
-                else:
-                    Foul = True
-            if not Foul:
-                for value in potted_balls:
-                    current_break.append(value)
-
-        label = myFont.render(player1_Score[0] + "'s Score = " + str(player1_Score[1]), True, pygame.color.Color(cloth_color))
-        my_win.blit(label, (50,height-100))
-
-        label = myFont.render(player2_Score[0] + "'s Score = " + str(player2_Score[1]), True, pygame.color.Color(cloth_color))
-        my_win.blit(label, (50,height-50))
+            for value in potted_balls:
+                current_break.append(value)
+                add_score(value,current_player,player1_Score, player2_Score)
+                potted_balls.clear()
+                if value < 0:
+                    if current_player == 1:
+                        current_player = 2
+                    else:
+                        current_player = 1
         
         ## Swap display
 
@@ -342,6 +391,20 @@ def create_balls(table_height, table_width, balls, red, yellow, green, brown, bl
     balls.append(red9)
     balls.append(red10)
     pass
+
+def add_score(score, current_player, player1, player2):
+    if score > 0:
+        if current_player == 1:
+            player1[1] += score
+        else:
+            player2[1] += score
+    elif score < 0:
+        if current_player == 1:
+            player2[1] += abs(score)
+        else:
+            player1[1] += abs(score)
+
+
 
 
 ## Start game

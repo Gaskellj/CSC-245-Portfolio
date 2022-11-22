@@ -11,6 +11,7 @@
 ##
 
 from hashlib import new
+import imp
 import pygame
 import math
 
@@ -69,19 +70,19 @@ class MovingBall (Ball):
         if self.p.x < 78+self.r:
             self.p.x = 78+self.r
             self.v.x *= -1
-            self.v *= 0.92
+            self.v *= 0.9
         elif self.p.x > 83+table_width-self.r:
             self.p.x = 83+table_width-self.r
             self.v.x *= -1
-            self.v *= 0.92
+            self.v *= 0.9
         if self.p.y < 78+self.r:
             self.p.y = 78+self.r
             self.v.y *= -1
-            self.v *= 0.92
+            self.v *= 0.9
         elif self.p.y > 85+table_height-self.r:
             self.p.y = 85+table_height-self.r
             self.v.y *= -1
-            self.v *= 0.92
+            self.v *= 0.9
 
     def collide_object (self, other):
         """ Check whether there is a collision with another object. If
@@ -185,3 +186,22 @@ class MovingBall (Ball):
                 potted_balls.append(self.value)
                 respot_list.append(self)
                 ball_list.remove(self)
+
+    def collide_pockets_cueball(self, pocket_list):
+        white_potted = False
+        for p in pocket_list:
+            position = Vector(p.x,p.y)
+            d = Vector(self.p.x,self.p.y) - position
+            if d.length() < self.r + p.r:
+                white_potted = True
+                print('white potted')
+                print(white_potted)
+        return white_potted
+
+    def ball_in_hand(self):
+        x, y = pygame.mouse.get_pos()
+        self.p.x = x
+        self.p.y = y
+
+    def normal_play(self):
+        pass

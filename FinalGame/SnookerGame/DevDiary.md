@@ -33,3 +33,13 @@
 25. Created Player1 and Player2 variables to track names and scores
 26. Added the sign in pages for player 1 and 2
 27. Added backspace functionality to the sign in pages
+
+
+11/21/2022
+
+29. Added foul behaviour for the cueball
+30. Rolled the cueball into the respot loop to prevent it being respotted whilst balls are still moving
+31. Fixed a bug by creating a new cueball and deleting the old one every time it is potted
+32. Introduced a change in player after the cueball is potted
+33. Used exception handling to stop cue_ball being referenced before it is added back to the game
+34. Added ball in hand behaviour soif the cueball is potted it can be movedby the next player
