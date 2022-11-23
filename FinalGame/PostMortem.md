@@ -50,6 +50,7 @@ POTENTIAL IMPROVEMENTS
 * There may be some redundency where operations are carried out twice; I could remove this by parsing through my code, taking pieces out and re-testing
 * I could decompose my procedures further to try and eliminate any repeated code within functions
 * I could better procedurise the main gameloop to make my code more readable
+* I maybe could have used finite states to split up behaviours of the cueball for normal play/ ball in hand etc.
 
 # SUMMARY
 
@@ -59,5 +60,12 @@ POTENTIAL IMPROVEMENTS
 
 # WHAT I HAVE LEARNED
 
+* Built-in sort using a lambda function
+* How to recognise different keys being pressed within the gameloop and how to give those actions behaviours
+* Exception handling in python
+* How to use multiple gameloops with different purposes to create a timetline to the game
+* Trigonometric math to draw the pool cue/ guide line
+* Reading/writing from text files
+* Friction game physics to reduce velocities
 
-
+Note: I did not work as a group so all work on Snooker Game is my own and was completed within the bounds of the Honor Code
