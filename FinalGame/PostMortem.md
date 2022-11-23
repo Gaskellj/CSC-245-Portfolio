@@ -43,8 +43,21 @@ WHAT WENT WELL
 * The solution is highly modular so objects and subroutines could be used for similar games (such as 8 ball pool)
 * I explored new constructs such as error handling to deal with removing sprites whilst continuing the gameloop
 * This is the first game I have created that can save data permenantly to text files (High scores)
-* My methods are, I believe, highly efficient and I have re-used code where possible
+* My methods are, I believe, highly efficient
+* I have created procedures that can be re-used by multiple instances of objects and have little redundent code
 
 POTENTIAL IMPROVEMENTS
 * There may be some redundency where operations are carried out twice; I could remove this by parsing through my code, taking pieces out and re-testing
+* I could decompose my procedures further to try and eliminate any repeated code within functions
+* I could better procedurise the main gameloop to make my code more readable
+
+# SUMMARY
+
+**If I were to start this project again** I could re-use many of the objects and functions/subroutines, however I would focus on the aesthetic design and centering the table. I would also make the playing surface bigger or resizable with the window. I would also like to include some more of the foul rules of snooker as my current game is not completely representitve of an actual snooker game.
+
+**If I were to continue with this project** I would potentially create a pool game mode using the subroutines that apply since most of the game physics are the same. I would also improve the aesthetic of the labels that display scoring information as well as creating full screen text alerts in case of fouls or when important information needs to be relayed to the player. A large addition to the game would be to add the repotted black tie-breaker; whilst this would be possible by copying pieces of code into a new tiebreaker game loop, this may be better implemented by procedurising my main code then using the snippets that apply.
+
+# WHAT I HAVE LEARNED
+
+
 
