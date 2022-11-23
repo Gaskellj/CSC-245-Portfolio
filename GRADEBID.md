@@ -28,4 +28,4 @@ I deduced my expected grade because I believe I have upheld my contract almost f
 
 #
 
-# THANKYOU, THE CLASS HAS BEEN VERY ENJOYABLE AND I HOPE I GET CHANCE TO TAKE ONE OF YOUR CLASSES AGAIN THIS YEAR
+# THANKYOU, I REALLY ENJOYED YOUR CLASS
