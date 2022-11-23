@@ -26,4 +26,6 @@ I deduced my expected grade because I believe I have upheld my contract almost f
 
 * I have struggled ultimately this term with time management and adapting to the course style at Union. I'm not sure if this is something you offer but if so I would welcome any possibility of extra credit and promise to attempt it to the best of my ability in order to raise my grade. 
 
+#
+
 # THANKYOU :)
