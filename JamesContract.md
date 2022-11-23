@@ -8,7 +8,7 @@ To earn a C I will,
 
 To earn a B I will,
 
-* Explore python/game concepts outside of class and submit them to my portfolio in a miscellaneous section
+* Explore a python/game concept outside of class and submit it to my portfolio in a miscellaneous section
 * Submit working programming assignments with all required features implemented
 * Submit revisions of at least 1/3 of Homework Assignments using feedback to demonstrate progress in programming style and competency
 
